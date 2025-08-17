@@ -1,0 +1,59 @@
+@use "@s/global" as *;
+//
+.table_ {
+  margin-top: 24px;
+  height: 100%;
+  border: 1px solid $grey-200;
+  border-radius: 10px;
+  overflow: auto;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+.table_::-webkit-scrollbar {
+  display: none;
+}
+.table {
+  width: 100%;
+  font-size: 16px;
+  line-height: 20px;
+  border-collapse: collapse;
+  text-indent: 0;
+  border-radius: 10px;
+}
+.table_h {
+  background-color: $grey-500;
+  position: sticky;
+  top: 0;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  vertical-align: middle;
+  text-transform: capitalize;
+  color: $grey-200;
+  white-space: nowrap;
+}
+.table_h tr {
+  border-bottom: 1px solid $grey-200;
+}
+.table_b {
+}
+.table_b tr {
+  background-color: $grey-500;
+  border-radius: 10px;
+  border-bottom: 1px solid $grey-300;
+}
+.table_d {
+  padding: 20px 16px;
+  vertical-align: middle;
+  height: 32px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.emptyText {
+  font-size: 16px;
+  width: 100%;
+  text-transform: capitalize;
+  text-align: center;
+  padding: 40px 24px;
+}

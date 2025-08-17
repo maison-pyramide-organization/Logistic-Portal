@@ -1,0 +1,20 @@
+@use "@s/global" as *;
+
+.sForm {
+  width: 100%;
+  background-color: $grey-600;
+  display: flex;
+  gap: 8px;
+  border-radius: 10px;
+  padding-inline: 16px;
+}
+.sForm input {
+  padding-block: 12px;
+  width: 100%;
+  &::placeholder {
+    color: $grey-200;
+  }
+}
+.sForm svg {
+  width: 24px;
+}

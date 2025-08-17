@@ -1,6 +1,15 @@
 /*
 * THIS FILES IS FOR RESETTING SOME OF THE DEFAULTS STYLES
 */
+:root {
+  --yellow: #f6c653;
+  --red: #ff4456;
+  --background-color: #0a0a0a;
+  --grey-500: #1c1c1c;
+  --grey-400: #585858;
+  --grey-300: #888;
+  --grey-200: #9ca3af;
+}
 
 * {
   margin: 0;
@@ -17,6 +26,8 @@ body {
   font-family: "inter", sans-serif;
   overscroll-behavior: none;
   font-size: 14px;
+  color: white;
+  background-color: var(--background-color);
 }
 h1,
 h2,
@@ -36,6 +47,9 @@ li {
 button {
   outline: none;
   background-color: transparent;
+  border: none;
+  display: block;
+  cursor: pointer;
 }
 img,
 video {
@@ -48,4 +62,13 @@ svg {
   display: block;
   width: 100%;
   height: auto;
+}
+
+input{
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
 }

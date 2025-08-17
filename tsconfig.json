@@ -11,7 +11,8 @@
       "@/*": ["*"],
       "@c/*": ["components/*"],
       "@a/*": ["assets/*"],
-      "@s/*": ["assets/styles/*"]
+      "@s/*": ["styles/*"],
+      "@d/*": ["data/*"]
     },
 
     /* Bundler mode */
@@ -24,6 +25,7 @@
 
     /* Linting */
     "strict": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true

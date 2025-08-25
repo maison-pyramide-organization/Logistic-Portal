@@ -1,9 +1,36 @@
 import client from "../contentful";
 
 const getOrders = async () => {
-  const res = await client.getEntries({ content_type: "order" });
-  const orders = res.items.map((order) => order.fields);
+  const { items } = await client.getEntries({
+    content_type: "order",
+  });
+
+  const orders = items.map(({ fields, sys }) => ({
+    ...fields,
+    id: sys.id,
+    // createdAt: sys.createdAt, // ISO8601 UTC
+    modifiedAt: sys.updatedAt, // ISO8601 UTC
+  }));
+
   return orders;
 };
+const getOrderById = async (orderId: string) => {
+  const { items } = await client.getEntries({
+    content_type: "order",
+    "fields.reference": orderId, // filter by field
+    limit: 1,
+  });
 
+  if (!items.length) return null;
+
+  const { fields, sys } = items[0];
+
+  return {
+    ...fields,
+    id: sys.id,
+    modifiedAt: sys.updatedAt,
+  };
+};
+
+export { getOrderById };
 export default getOrders;

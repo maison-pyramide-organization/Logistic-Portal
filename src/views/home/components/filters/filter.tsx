@@ -11,35 +11,35 @@ import CheckedBoxIcon from "@a/icons/checkedBox.svg?react";
 
 interface Iprops {
   filter: any;
+  active?: string;
+  onOptionClick: (value: string) => void;
 }
-const Filter = (props: Iprops) => {
-  const { filter } = props;
-  const [isOpend, setIsOpened] = useState(false);
 
-  const handleClick = () => {
-    setIsOpened(!isOpend);
-  };
+const Filter = ({ filter, active, onOptionClick }: Iprops) => {
+  const [isOpened, setIsOpened] = useState(false);
+  const isActiveOption = (opt: string) => active === opt;
 
   return (
-    <>
-      <div className={`${s.f} ${isOpend ? "open" : ""}`}>
-        <button type="button" className={s.f_h} onClick={handleClick}>
-          <h3>{filter.name}</h3>
-          {isOpend ? <MinusIcon /> : <PlusIcon />}
-        </button>
-
-        {isOpend && (
-          <ul className={s.f_body}>
-            {filter.options.map((opt) => (
-              <li key={opt}>
-                <CheckBoxIcon />
-                <span>{opt}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </>
+    <div data-filter={filter.name} className={`${s.f} ${isOpened ? "open" : ""}`}>
+      <button
+        type="button"
+        className={s.f_h}
+        onClick={() => setIsOpened(!isOpened)}
+      >
+        <h3>{filter.name}</h3>
+        {isOpened ? <MinusIcon /> : <PlusIcon />}
+      </button>
+      {isOpened && (
+        <ul className={s.f_body}>
+          {filter.options.map((opt) => (
+            <li key={opt} onClick={() => onOptionClick(opt)}>
+              {isActiveOption(opt) ? <CheckedBoxIcon /> : <CheckBoxIcon />}
+              <span>{opt}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 

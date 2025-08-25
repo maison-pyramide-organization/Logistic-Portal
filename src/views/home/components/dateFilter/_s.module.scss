@@ -1,13 +1,13 @@
 @use "@s/global" as *;
 
-.sortBy {
+.df {
   max-width: -moz-fit-content;
   max-width: fit-content;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.sortBy svg {
+.df svg {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
@@ -15,19 +15,20 @@
   &:hover {
     stroke: $yellow;
   }
-  &:last-child{
+  &:last-child {
     transform: rotate(180deg);
   }
 }
-.sortBy ul {
+.df ul {
   display: flex;
   gap: 24px;
 }
-.sortBy li {
+.df li {
+  padding: 10px 16px;
+  color: $grey-200;
   font-size: 14px;
   background-color: $grey-600;
   border-radius: 36px;
-  padding: 10px 16px;
   text-transform: capitalize;
   white-space: nowrap;
   cursor: pointer;
@@ -35,7 +36,7 @@
     background-color: $grey-500;
   }
 }
-.active {
-  background-color: var(--grey-500);
+.df li.active {
+  background-color: $grey-500;
   color: white;
 }

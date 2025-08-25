@@ -6,12 +6,14 @@ interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
   loading: boolean;
+  type: "retailer" | "brand" | "admin";
 }
 
-const AuthContext = createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoggedIn: false,
   loading: true,
+  type: "retailer",
 });
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -31,6 +33,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     user,
     isLoggedIn: !!user,
     loading,
+    type: "retailer",
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

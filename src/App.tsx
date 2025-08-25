@@ -4,6 +4,7 @@ import Test from "./views/test";
 import Login from "./views/login";
 import AuthProvider from "./contexts/authContext";
 import PrivateRoute from "./layout/privateRoute";
+import Order from "./views/order";
 
 const App = () => {
   return (
@@ -15,6 +16,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/orders/:orderId"
+          element={
+            <PrivateRoute>
+              <Order />
             </PrivateRoute>
           }
         />

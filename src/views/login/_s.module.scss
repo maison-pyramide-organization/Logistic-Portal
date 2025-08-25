@@ -1,1 +1,67 @@
-//
+@use "@s/global" as *;
+
+.p {
+  height: 100vh;
+  height: 100dvh;
+  background-color: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 24px;
+}
+
+.m {
+  width: clamp(0px, 500px, 100%);
+  border-radius: 20px;
+  background-color: $grey-600;
+  padding: 40px 32px;
+}
+.logo {
+  width: 80px;
+  aspect-ratio: 1;
+  background-color: $grey-400;
+  margin-inline: auto;
+  border-radius: 10px;
+}
+.title {
+  margin-top: 24px;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+}
+
+.f {
+  margin-top: 40px;
+}
+.f input {
+  margin-top: 24px;
+  padding: 16px 20px;
+  width: 100%;
+  color: white;
+  background-color: $grey-500;
+  border-radius: 10px;
+  font-size: 16px;
+  &:placeholder {
+    color: $grey-200;
+    // font-size: 14px;
+  }
+}
+
+.f button {
+  padding: 16px 20px;
+  width: 100%;
+  background-color: $grey-400;
+  color: white;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  margin-top: 80px;
+  border-radius: 10px;
+}
+
+.reset {
+  margin-top: 24px;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}

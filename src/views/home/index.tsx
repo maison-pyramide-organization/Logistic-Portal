@@ -1,40 +1,38 @@
 import s from "./_s.module.scss";
-import { useEffect, useState } from "react";
 import OrdersTable from "./components/orders table/Table";
-import getOrders from "@/services/api/orders";
 import Filters from "./components/filters/FiltersList";
 import Analytics from "./components/analytics";
 import Search from "./components/search";
-import SortBy from "./components/sortBy";
+import SortBy from "./components/dateFilter";
+import OrdersProvider from "@/contexts/ordersContext";
+import AuthProvider from "@/contexts/authContext";
 
 const Home = () => {
-  const [orders, setOrders] = useState<any[]>([]);
-
-  useEffect(() => {
-    getOrders().then((orders) => {
-      setOrders(orders);
-    });
-  }, []);
-
   return (
-    <div className={s.p}>
-      {/* <header></header> */}
-      <aside>
-        <Filters />
-      </aside>
-      <main>
-        <Analytics orders={orders} />
-        <div className={s.ctrl}>
-          <div className={s.search_}>
-            <Search />
-          </div>
-          <div className={s.sortBy_}>
-            <SortBy />
-          </div>
+    <AuthProvider>
+      <OrdersProvider>
+        <div className={s.p}>
+          <header className={s.h}></header>
+          <main className={s.m}>
+            <aside>
+              <Filters />
+            </aside>
+            <div className={s.content}>
+              <Analytics />
+              <div className={s.ctrl}>
+                <div className={s.search_}>
+                  <Search />
+                </div>
+                <div className={s.sortBy_}>
+                  <SortBy />
+                </div>
+              </div>
+              <OrdersTable />
+            </div>
+          </main>
         </div>
-        <OrdersTable orders={orders} />
-      </main>
-    </div>
+      </OrdersProvider>
+    </AuthProvider>
   );
 };
 

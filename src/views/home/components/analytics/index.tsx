@@ -1,11 +1,11 @@
+import { OrdersContext } from "@/contexts/ordersContext";
 import s from "./_s.module.scss";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
-interface Iprops {
-  orders: any[];
-}
-const Analytics = (props: Iprops) => {
-  const { orders } = props;
+const Analytics = () => {
+  const {
+    state: { _orders: orders },
+  } = useContext(OrdersContext);
 
   const status = [
     { status: "Pending", count: 10, color: "#F3E351" },

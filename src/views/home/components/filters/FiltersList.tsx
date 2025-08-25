@@ -1,59 +1,56 @@
-import { useEffect, useState } from "react";
 import s from "./_s.module.scss";
-// @ts-ignore
-import ChevIcon from "@a/icons/chev.svg?react";
+import { useContext } from "react";
 import Filter from "./filter";
+import getFiltersList from "../../utils/getFilters";
+import { OrdersContext } from "@/contexts/ordersContext";
+import { ACTIONS } from "@/reducers/ordersReducer";
+import SortBy from "./sortBy";
 
 const FiltersList = () => {
-  const filters = [
-    { name: "Brands", options: ["ndd", "ddsfd", "gsdfsd"] },
-    { name: "Seasons", options: ["ss24", "aw24", "fw25"] },
-    {
-      name: "Status",
-      options: ["in production", "pending", "paid", "shipped"],
-    },
-  ];
+  const {
+    state: { _orders: orders, filters },
+    dispatch,
+  } = useContext(OrdersContext);
 
-  const [openIndex, setOpenIndex] = useState<number>(0);
+  const filtersList = getFiltersList(orders);
 
-  const handleClick = (index: number) => {
-    setOpenIndex(index);
+  const handleClearClick = () => {
+    dispatch({ type: ACTIONS.CLEAR_FILTERS });
   };
 
-  useEffect(() => {
-    const $filters = document.querySelectorAll(`.${s.f}`);
-    $filters.forEach((filter) => {
-      const $body: any = filter.querySelector(`.${s.f_b}`);
-      const $options_list = $body?.querySelector("ul");
-      const $options_h = $options_list?.offsetHeight;
-      $body?.style.setProperty("--height", `${$options_h}px`);
+  const handleOptionClick = (filterName: string, filterOption: string) => {
+    dispatch({
+      type: ACTIONS.FILTER,
+      payload: { filterName, filterOption },
     });
-  }, []);
+  };
 
   return (
     <div className={s.fl}>
       <div className={s.fl_h}>
         <div className={s.fl_h_t}>
           <h2>Filters</h2>
-          <button>Clear</button>
+          <button onClick={handleClearClick}>Clear</button>
         </div>
         <div className={s.fl_h_b}>
-          <p>Monot - SS24 - Laila</p>
+          <p>
+            {[filters.brand, filters.season, filters.status]
+              .filter(Boolean) // remove undefined
+              .join(" • ") || "No filters selected"}
+          </p>
         </div>
       </div>
 
       <div className={s.fl_b}>
-        <div className={s.f_date}>
-          <h3>Date</h3>
-          <ul>
-            <li>last week</li>
-            <li>last month</li>
-            <li>last quarter</li>
-          </ul>
-        </div>
+        <SortBy />
 
-        {filters.map((filter) => (
-          <Filter filter={filter} key={filter.name} />
+        {filtersList.map((f) => (
+          <Filter
+            key={f.name}
+            filter={f}
+            active={filters[f.name]}
+            onOptionClick={(val) => handleOptionClick(f.name, val)}
+          />
         ))}
       </div>
     </div>

@@ -1,0 +1,27 @@
+@use "@s/global" as *;
+
+.d {
+  padding: 32px 24px;
+  background-color: $grey-600;
+  border-radius: 10px;
+}
+
+.d_h {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.d_b {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px 20px;
+}
+
+.line{
+    width: 100%;
+    height: 1px;
+    background-color: $grey-300;
+    margin-block: 40px;
+}

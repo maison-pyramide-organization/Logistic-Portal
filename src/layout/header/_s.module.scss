@@ -1,0 +1,9 @@
+@use "@s/global" as *;
+
+.h {
+  margin-top: 20px;
+  margin-inline: 20px;
+  height: 60px;
+  background-color: $grey-600;
+  border-radius: 10px;
+}

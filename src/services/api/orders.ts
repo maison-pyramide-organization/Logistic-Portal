@@ -15,22 +15,40 @@ const getOrders = async () => {
   return orders;
 };
 const getOrderById = async (orderId: string) => {
-  const { items } = await client.getEntries({
-    content_type: "order",
-    "fields.reference": orderId, // filter by field
-    limit: 1,
-  });
+  try {
+    const entry = await client.getEntry(orderId);
 
-  if (!items.length) return null;
+    if (!entry) return null;
 
-  const { fields, sys } = items[0];
+    const { fields, sys } = entry;
 
-  return {
-    ...fields,
-    id: sys.id,
-    modifiedAt: sys.updatedAt,
-  };
+    return {
+      ...fields,
+      id: sys.id,
+      modifiedAt: sys.updatedAt,
+    };
+  } catch (err) {
+    console.error("Error fetching order by id:", err);
+    return null;
+  }
 };
+// const getOrderById = async (orderId: string) => {
+//   const { items } = await client.getEntries({
+//     content_type: "order",
+//     "fields.reference": orderId, // filter by field
+//     limit: 1,
+//   });
+
+//   if (!items.length) return null;
+
+//   const { fields, sys } = items[0];
+
+//   return {
+//     ...fields,
+//     id: sys.id,
+//     modifiedAt: sys.updatedAt,
+//   };
+// };
 
 export { getOrderById };
 export default getOrders;

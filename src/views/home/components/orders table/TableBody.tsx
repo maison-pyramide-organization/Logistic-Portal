@@ -25,7 +25,7 @@ const OrdersTableBody = () => {
         <tr
           className={s.table_r}
           key={order.reference}
-          data-id={order.reference}
+          data-id={order.id}
           onClick={handleOrderClick}
         >
           <td className={s.table_d}>{order.reference || "-"}</td>

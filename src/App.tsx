@@ -5,12 +5,13 @@ import Login from "./views/login";
 import AuthProvider from "./contexts/authContext";
 import PrivateRoute from "./layout/privateRoute";
 import Order from "./views/order";
+import Header from "./layout/header";
 
 const App = () => {
   return (
     <AuthProvider>
+      <Header/>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
         <Route
           path="/"
           element={

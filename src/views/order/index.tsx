@@ -1,8 +1,13 @@
-// import s from "./_s.module.scss";
+import s from "./_s.module.scss";
 
 import { getOrderById } from "@/services/api/orders";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Details from "./components/details";
+import FinancialSummary from "./components/financialSummary";
+import Contact from "./components/contact";
+import Notes from "./components/notes";
+import Shipping from "./components/shipping";
 
 const Order = () => {
   const { orderId } = useParams() as any;
@@ -11,8 +16,6 @@ const Order = () => {
 
   useEffect(() => {
     getOrderById(orderId).then((order) => {
-      console.log(order);
-
       setOrder(order);
     });
   }, []);
@@ -20,18 +23,17 @@ const Order = () => {
   if (!order) return null;
 
   return (
-    <>
-      <div>Order ID: {orderId}</div>
-      <a
-        href={order.invoice.fields.file.url}
-        download={order.invoice.fields.fileName}
-        target="_blank"
-        rel="noopener"
-        className="btn"
-      >
-        download
-      </a>
-    </>
+    <div className={s.p}>
+      <main>
+        <Details order={order} />
+        <Shipping order={order} />
+      </main>
+      <aside>
+        <FinancialSummary order={order} />
+        <Contact />
+        <Notes />
+      </aside>
+    </div>
   );
 };
 export default Order;

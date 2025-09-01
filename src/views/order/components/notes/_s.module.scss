@@ -1,0 +1,22 @@
+@use "@s/global" as *;
+
+.n {
+  margin-top: 24px;
+  padding: 32px 24px;
+  background-color: $grey-600;
+  border-radius: 10px;
+}
+
+.n_h {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.n_b {
+  margin-top: 32px;
+}
+
+.n_b p {
+  margin-top: 8px;
+  color: white;
+}

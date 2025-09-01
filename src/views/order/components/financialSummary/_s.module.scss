@@ -1,0 +1,27 @@
+@use "@s/global" as *;
+
+.fs {
+  padding: 32px 24px;
+  background-color: $grey-600;
+  border-radius: 10px;
+}
+
+.fs_h {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.fs_b {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap:24px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: $grey-300;
+  margin-block: 40px;
+}

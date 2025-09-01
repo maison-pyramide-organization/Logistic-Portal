@@ -1,0 +1,16 @@
+@use "@s/global" as *;
+
+.downBtn {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  background-color: $grey-300;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.downBtn svg {
+  width: 16px;
+}

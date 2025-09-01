@@ -5,34 +5,30 @@ import Analytics from "./components/analytics";
 import Search from "./components/search";
 import SortBy from "./components/dateFilter";
 import OrdersProvider from "@/contexts/ordersContext";
-import AuthProvider from "@/contexts/authContext";
 
 const Home = () => {
   return (
-    <AuthProvider>
-      <OrdersProvider>
-        <div className={s.p}>
-          <header className={s.h}></header>
-          <main className={s.m}>
-            <aside>
-              <Filters />
-            </aside>
-            <div className={s.content}>
-              <Analytics />
-              <div className={s.ctrl}>
-                <div className={s.search_}>
-                  <Search />
-                </div>
-                <div className={s.sortBy_}>
-                  <SortBy />
-                </div>
+    <OrdersProvider>
+      <div className={s.p}>
+        <main className={s.m}>
+          <aside>
+            <Filters />
+          </aside>
+          <div className={s.content}>
+            <Analytics />
+            <div className={s.ctrl}>
+              <div className={s.search_}>
+                <Search />
               </div>
-              <OrdersTable />
+              <div className={s.sortBy_}>
+                <SortBy />
+              </div>
             </div>
-          </main>
-        </div>
-      </OrdersProvider>
-    </AuthProvider>
+            <OrdersTable />
+          </div>
+        </main>
+      </div>
+    </OrdersProvider>
   );
 };
 

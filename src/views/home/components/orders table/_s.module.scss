@@ -42,6 +42,10 @@
   background-color: $grey-500;
   border-radius: 10px;
   border-bottom: 1px solid $grey-300;
+  cursor: pointer;
+  &:hover {
+    background-color: $grey-400;
+  }
 }
 .table_d {
   padding: 20px 16px;

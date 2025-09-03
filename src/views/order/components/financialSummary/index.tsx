@@ -5,15 +5,25 @@ interface Iprops {
   order: any;
 }
 const FinancialSummary = (props: Iprops) => {
-  const { amount, settled, creditNote, outstanding, invoiceNumber } =
-    props.order;
+  const {
+    amount,
+    settled,
+    creditNote,
+    outstanding,
+    duePayment,
+    paymentStatus,
+    invoiceNumber,
+  } = props.order;
   const infos = [
     { title: "Total Order Amount", content: amount },
+    { title: "Settled", content: settled },
     { title: "Credit Note", content: creditNote },
   ];
   const infos2 = [
     { title: "Outstanding", content: outstanding },
-    { title: "Settled Amount", content: settled },
+    { title: "Due Payment", content: duePayment },
+    { title: "Payment Status", content: paymentStatus },
+
   ];
 
   return (

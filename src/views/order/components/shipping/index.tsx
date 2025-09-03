@@ -8,13 +8,22 @@ interface Iprops {
 
 const Shipping = (props: Iprops) => {
   const {
-    shippingStatus,
+    shippingTerms,
     shippingDate,
     trackingNumber,
+    deliveryDate,
+    deliverySchedule,
     awb,
     packingList,
     commercialInvoice,
   } = props.order;
+
+  const infos = [
+    { title: "Shipping Terms", content: shippingTerms },
+    { title: "Shipping Date", content: shippingDate },
+    { title: "Delivery Schedule", content: deliverySchedule },
+    { title: "Delivery Date", content: deliveryDate },
+  ];
 
   return (
     <div className={s.sh}>
@@ -22,9 +31,11 @@ const Shipping = (props: Iprops) => {
         <h2>Shipping</h2>
       </div>
       <div className={s.sh_b}>
-        <Info title="Shipping Status">{shippingStatus}</Info>
-        <Info title="Shipping Date">{shippingDate}</Info>
-        <Info title="Tracking Number">{trackingNumber}</Info>
+        {infos.map((info) => (
+          <Info key={info.title} title={info.title} h={false}>
+            {info.content || "--"}
+          </Info>
+        ))}
       </div>
       <div className={s.line}></div>
       <div className={s.sh_b}>

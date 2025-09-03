@@ -1,5 +1,5 @@
-import OrderStatus from "@/components/status";
 import s from "./_s.module.scss";
+import OrderStatus from "@/components/status";
 import Info from "../info";
 import DownBtn from "../downloadBtn";
 
@@ -9,8 +9,9 @@ interface Iprops {
 
 const Details = (props: Iprops) => {
   const {
+    ocNumber,
+    poNumber,
     status,
-    reference,
     brand,
     season,
     quantity,
@@ -18,16 +19,18 @@ const Details = (props: Iprops) => {
     paymentTerms,
     oc,
     po,
-    invoice,
+    productionStatus
   } = props.order;
 
   const infos = [
-    { title: "Order Reference", content: reference },
+    { title: "Order Confirmation", content: ocNumber },
+    { title: "Purchase Order", content: poNumber },
     { title: "Brand", content: brand },
     { title: "Season", content: season },
     { title: "Quantity", content: quantity },
     { title: "Amount", content: amount },
     { title: "Payment Terms", content: paymentTerms },
+    { title: "Production Status", content: productionStatus },
   ];
 
   return (
@@ -40,15 +43,15 @@ const Details = (props: Iprops) => {
       </div>
       <div className={s.d_b}>
         {infos.map((info) => (
-          <Info key={info.title} title={info.title}>
+          <Info key={info.title} title={info.title} h={false}>
             {info.content || "--"}
           </Info>
         ))}
       </div>
       <div className={s.line}></div>
       <div className={s.d_b}>
-        <DownBtn title="OC" doc={oc} />
-        <DownBtn title="PO" doc={po} />
+        <DownBtn title="Order Confirmation" doc={oc} />
+        <DownBtn title="Purchase Order" doc={po} />
         <DownBtn title="Invoice" doc={oc} />
       </div>
     </div>

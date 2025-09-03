@@ -24,15 +24,19 @@ const Order = () => {
 
   return (
     <div className={s.p}>
-      <main>
-        <Details order={order} />
-        <Shipping order={order} />
-      </main>
-      <aside>
-        <FinancialSummary order={order} />
-        <Contact />
-        <Notes />
-      </aside>
+      <Details order={order} />
+
+      <div className={s.c}>
+        <div className={s.cl}>
+          <Shipping order={order} />
+          <Notes notes={order.notes} />
+        </div>
+
+        <div className={s.cr}>
+          <FinancialSummary order={order} />
+          <Contact />
+        </div>
+      </div>
     </div>
   );
 };

@@ -14,6 +14,37 @@ const getOrders = async () => {
 
   return orders;
 };
+
+const getBrandOrders = async (brand: string) => {
+  const { items } = await client.getEntries({
+    content_type: "order",
+    "fields.brand": brand,
+  });
+
+  const orders = items.map(({ fields, sys }) => ({
+    ...fields,
+    id: sys.id,
+    modifiedAt: sys.updatedAt, // ISO8601 UTC
+  }));
+
+  return orders;
+};
+
+const getRetailerOrders = async (retailer: string) => {
+  const { items } = await client.getEntries({
+    content_type: "order",
+    "fields.retailer": retailer,
+  });
+
+  const orders = items.map(({ fields, sys }) => ({
+    ...fields,
+    id: sys.id,
+    modifiedAt: sys.updatedAt, // ISO8601 UTC
+  }));
+
+  return orders;
+};
+
 const getOrderById = async (orderId: string) => {
   try {
     const entry = await client.getEntry(orderId);
@@ -50,5 +81,5 @@ const getOrderById = async (orderId: string) => {
 //   };
 // };
 
-export { getOrderById };
+export { getOrderById, getBrandOrders, getRetailerOrders };
 export default getOrders;

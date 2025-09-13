@@ -1,28 +1,33 @@
 import { AuthContext } from "@/contexts/authContext";
 import s from "./_s.module.scss";
-
-import { signIn } from "@/services/firebase/auth";
-import { useContext } from "react";
+import logo from "@a/images/logo.png";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AuthContext);
-  if (isLoggedIn) navigate("/");
+  const { isLoggedIn, login } = useContext(AuthContext);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    const { user } = await signIn(email, password);
-    if (user) navigate("/");
+    await login(email, password);
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className={s.p}>
       <main className={s.m}>
-        <div className={s.logo}></div>
+        <div className={s.logo}>
+          <img src={logo} alt="Maison Pyramide Emblem" />
+        </div>
         <h1 className={s.title}>Logistics Portal</h1>
         <form onSubmit={onSubmit} className={s.f}>
           <input id="email" type="email" placeholder="Email" />

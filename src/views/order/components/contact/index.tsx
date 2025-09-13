@@ -19,7 +19,7 @@ const Contact = () => {
       </div>
       <div className={s.c_b}>
         {contacts.map((contact) => (
-          <div className={s.p}>
+          <div className={s.p} key={contact.email}>
             <figure></figure>
             <div className={s.p_info}>
               <h3>{contact.name}</h3>

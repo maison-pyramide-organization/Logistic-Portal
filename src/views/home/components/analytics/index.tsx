@@ -11,7 +11,7 @@ const Analytics = () => {
     { status: "Pending", count: 10, color: "#F3E351" },
     { status: "In Production", count: 8, color: "#8962F0" },
     { status: "Shipped", count: 22, color: "#FF8D1C" },
-    { status: "Completed", count: 32, color: "#28D373" },
+    { status: "Closed", count: 32, color: "#28D373" },
   ];
 
   useEffect(() => {

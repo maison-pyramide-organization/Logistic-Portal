@@ -37,3 +37,29 @@
   line-height: 1;
   color: white;
 }
+.h_dd {
+  position: absolute;
+  top: 84px;
+  right: 20px;
+  min-width: 200px;
+  border-radius: 10px;
+  background-color: $grey-500;
+  // box-shadow: 0 2px 4px rgba(78, 79, 81, 0.05), 0 4px 16px rgba(29, 41, 57, 0.1);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+.h_dd:global(.open) {
+  opacity: 1;
+  visibility: visible;
+}
+.h_dd li {
+  padding: 24px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    background-color: $grey-400;
+  }
+}

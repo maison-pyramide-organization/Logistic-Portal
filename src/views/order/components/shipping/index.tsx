@@ -1,6 +1,7 @@
 import s from "./_s.module.scss";
 import Info from "../info";
 import DownBtn from "../downloadBtn";
+import Status from "@/components/status";
 
 interface Iprops {
   order: any;
@@ -12,7 +13,7 @@ const Shipping = (props: Iprops) => {
     shippingDate,
     trackingNumber,
     deliveryDate,
-    deliverySchedule,
+    deliveryStatus,
     awb,
     packingList,
     commercialInvoice,
@@ -21,7 +22,7 @@ const Shipping = (props: Iprops) => {
   const infos = [
     { title: "Shipping Terms", content: shippingTerms },
     { title: "Shipping Date", content: shippingDate },
-    { title: "Delivery Schedule", content: deliverySchedule },
+    { title: "Tracking Number", content: trackingNumber },
     { title: "Delivery Date", content: deliveryDate },
   ];
 
@@ -29,6 +30,7 @@ const Shipping = (props: Iprops) => {
     <div className={s.sh}>
       <div className={s.sh_h}>
         <h2>Shipping</h2>
+        <Status status={deliveryStatus} />
       </div>
       <div className={s.sh_b}>
         {infos.map((info) => (

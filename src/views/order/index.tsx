@@ -34,9 +34,9 @@ const Order = () => {
 
         <div className={s.cr}>
           <FinancialSummary order={order} />
-          <Contact />
         </div>
       </div>
+      <Contact />
     </div>
   );
 };

@@ -10,28 +10,29 @@ const OrdersTableBody = () => {
     state: { orders },
   } = useContext(OrdersContext);
   const navigate = useNavigate();
-  const { type: userType } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const handleOrderClick = (e) => {
     const $orderRow = e.currentTarget;
     const orderId = $orderRow.getAttribute("data-id");
-
     navigate(`/orders/${orderId}`);
   };
 
   return (
     <tbody className={s.table_b}>
-      {orders?.map((order) => (
+      {orders?.map((order, i) => (
         <tr
           className={s.table_r}
-          key={order.reference}
+          key={i}
           data-id={order.id}
           onClick={handleOrderClick}
         >
-          <td className={s.table_d}>{order.reference || "-"}</td>
+          <td className={s.table_d}>{order.ocNumber || "--"}</td>
+          <td className={s.table_d}>{order.poNumber || "--"}</td>
           <td className={s.table_d}>
-            {userType == "brand" ? order.retailer : order.brand}
+            {user.type == "brand" ? order.retailer : order.brand}
           </td>
+          {user.type == "admin" && <td className={s.table_d}>{order.retailer}</td>}
           <td className={s.table_d}>{order.status}</td>
           <td className={s.table_d}>{formatDate(order.created)}</td>
           <td className={s.table_d}>{order.quantity}</td>

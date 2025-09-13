@@ -1,36 +1,46 @@
 import s from "./_s.module.scss";
-import OrderStatus from "@/components/status";
+import Status from "@/components/status";
 import Info from "../info";
 import DownBtn from "../downloadBtn";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/authContext";
 
 interface Iprops {
   order: any;
 }
 
 const Details = (props: Iprops) => {
+  const { user } = useContext(AuthContext);
+
   const {
     ocNumber,
     poNumber,
     status,
     brand,
+    retailer,
     season,
     quantity,
     amount,
     paymentTerms,
     oc,
     po,
-    productionStatus
+    productionStatus,
   } = props.order;
 
-  const infos = [
+  const x =
+    user.type == "brand"
+      ? { title: "Brand", content: brand }
+      : { title: "Retailer", content: retailer };
+
+  const infos: any = [
     { title: "Order Confirmation", content: ocNumber },
     { title: "Purchase Order", content: poNumber },
-    { title: "Brand", content: brand },
-    { title: "Season", content: season },
+    x,
+    { title: "Season", content: season, align: "right" },
     { title: "Quantity", content: quantity },
     { title: "Amount", content: amount },
     { title: "Payment Terms", content: paymentTerms },
-    { title: "Production Status", content: productionStatus },
+    { title: "Production Status", content: productionStatus, align: "right" },
   ];
 
   return (
@@ -38,12 +48,17 @@ const Details = (props: Iprops) => {
       <div className={s.d_h}>
         <h2>Order Details</h2>
         <div>
-          <OrderStatus status={status} />
+          <Status status={status} />
         </div>
       </div>
       <div className={s.d_b}>
         {infos.map((info) => (
-          <Info key={info.title} title={info.title} h={false}>
+          <Info
+            key={info.title}
+            title={info.title}
+            h={false}
+            align={info?.align}
+          >
             {info.content || "--"}
           </Info>
         ))}
@@ -57,4 +72,5 @@ const Details = (props: Iprops) => {
     </div>
   );
 };
+
 export default Details;

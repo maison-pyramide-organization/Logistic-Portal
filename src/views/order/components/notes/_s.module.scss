@@ -1,6 +1,7 @@
 @use "@s/global" as *;
 
 .n {
+  flex-basis: 100%;
   margin-top: 24px;
   padding: 32px 24px;
   background-color: $grey-600;

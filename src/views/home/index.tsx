@@ -4,31 +4,28 @@ import Filters from "./components/filters/FiltersList";
 import Analytics from "./components/analytics";
 import Search from "./components/search";
 import SortBy from "./components/dateFilter";
-import OrdersProvider from "@/contexts/ordersContext";
 
 const Home = () => {
   return (
-    <OrdersProvider>
-      <div className={s.p}>
-        <main className={s.m}>
-          <aside>
-            <Filters />
-          </aside>
-          <div className={s.content}>
-            <Analytics />
-            <div className={s.ctrl}>
-              <div className={s.search_}>
-                <Search />
-              </div>
-              <div className={s.sortBy_}>
-                <SortBy />
-              </div>
+    <div className={s.p}>
+      <main className={s.m}>
+        <aside>
+          <Filters />
+        </aside>
+        <div className={s.content}>
+          <Analytics />
+          <div className={s.ctrl}>
+            <div className={s.search_}>
+              <Search />
             </div>
-            <OrdersTable />
+            <div className={s.sortBy_}>
+              <SortBy />
+            </div>
           </div>
-        </main>
-      </div>
-    </OrdersProvider>
+          <OrdersTable />
+        </div>
+      </main>
+    </div>
   );
 };
 

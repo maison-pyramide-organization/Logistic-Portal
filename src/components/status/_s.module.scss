@@ -2,6 +2,8 @@
   padding: 8px;
   border-radius: 8px;
   font-size: 16px;
+  color: #f3e351;
+  background-color: #3f3e31;
 }
 .canceled {
   color: #e14d6d;
@@ -15,7 +17,8 @@
   color: #8962f0;
   background-color: #2b2c31;
 }
-.paid {
+.closed,
+.delivered {
   color: #28d373;
   background-color: #2b312f;
 }

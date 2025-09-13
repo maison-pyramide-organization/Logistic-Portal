@@ -15,10 +15,20 @@
 
 .c_b {
   margin-top: 32px;
+  display: flex;
 }
-
-.p:not(:first-child) {
-  margin-top: 24px;
+.p {
+  flex-basis: 100%;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.p figure {
+  flex-shrink: 0;
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 100px;
+  background-color: $grey-200;
 }
 
 .p_info h3 {

@@ -1,12 +1,17 @@
 import reducer, { ACTIONS, INITIAL_STATE } from "@/reducers/ordersReducer";
-import getOrders from "@/services/api/orders";
+import getOrders, {
+  getBrandOrders,
+  getRetailerOrders,
+} from "@/services/api/orders";
 import {
   createContext,
   Dispatch,
   ReactNode,
+  useContext,
   useEffect,
   useReducer,
 } from "react";
+import { AuthContext } from "./authContext";
 
 interface Icontext {
   state: any;
@@ -23,10 +28,25 @@ export const OrdersContext = createContext<Icontext>({
 const OrdersProvider = ({ children }: Iprops) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const data = { state, dispatch };
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const orders = await getOrders();
+      let orders;
+
+      switch (user.type) {
+        case "brand":
+          orders = await getBrandOrders(user.name);
+          break;
+        case "retailer":
+          orders = await getRetailerOrders(user.name);
+          break;
+        default:
+          orders = await getOrders();
+          break;
+      }
+      // orders = await getOrders();
+
       dispatch({ type: ACTIONS.SET_ORDERS, payload: orders });
     };
     fetchOrders();

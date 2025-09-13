@@ -5,6 +5,7 @@ import getFiltersList from "../../utils/getFilters";
 import { OrdersContext } from "@/contexts/ordersContext";
 import { ACTIONS } from "@/reducers/ordersReducer";
 import SortBy from "./sortBy";
+import { AuthContext } from "@/contexts/authContext";
 
 const FiltersList = () => {
   const {
@@ -12,7 +13,9 @@ const FiltersList = () => {
     dispatch,
   } = useContext(OrdersContext);
 
-  const filtersList = getFiltersList(orders);
+  const { user } = useContext(AuthContext);
+
+  const filtersList = getFiltersList(orders, user.type);
 
   const handleClearClick = () => {
     dispatch({ type: ACTIONS.CLEAR_FILTERS });

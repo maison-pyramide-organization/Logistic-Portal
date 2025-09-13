@@ -2,7 +2,7 @@
 
 .p {
   padding-inline: 20px;
-  margin-top: 24px;
+  margin-block: 24px;
 }
 .c {
   margin-top: 24px;
@@ -12,6 +12,8 @@
 
 .cl {
   width: calc(5 / 8 * 100%);
+  display: flex;
+  flex-direction: column;
 }
 .cr {
   width: calc(3 / 8 * 100%);

@@ -4,6 +4,7 @@ interface Iprops {
   title: string;
   children: any;
   h: boolean;
+  align?: string;
 }
 const Info = (props: Iprops) => {
   const { title, children, h } = props;

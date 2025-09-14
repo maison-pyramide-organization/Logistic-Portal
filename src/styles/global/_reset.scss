@@ -17,6 +17,7 @@
   box-sizing: border-box;
 }
 html {
+  overscroll-behavior: none;
   font-size: calc(100vw / 1440);
   @media (width < 780px) {
     font-size: calc(100vw / 400);

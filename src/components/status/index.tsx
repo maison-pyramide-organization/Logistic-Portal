@@ -6,7 +6,7 @@ interface Iprops {
 
 const Status = (props: Iprops) => {
   const { status } = props;
-  const classes = `${s.status} ${s[status.replace(" ", "")?.toLowerCase()]}`;
+  const classes = `${s.status} ${s[status?.replace(" ", "")?.toLowerCase()]}`;
 
   return <div className={classes}>{status}</div>;
 };

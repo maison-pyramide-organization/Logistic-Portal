@@ -19,7 +19,7 @@ const FinancialSummary = (props: Iprops) => {
     duePayment,
     paymentStatus,
     invoiceNumber,
-    others,
+    financialDocuments,
   } = props.order;
 
   const infos = [
@@ -64,14 +64,16 @@ const FinancialSummary = (props: Iprops) => {
               {info.content || "--"}
             </Info>
           ))}
-          <button className={s.docsBtn} onClick={openPopup}>Financial Documents</button>
+          <button className={s.docsBtn} onClick={openPopup}>
+            Financial Documents
+          </button>
         </div>
       </div>
 
       {isOpened && (
         <Popup
           title="Financial Documents"
-          documents={others}
+          documents={financialDocuments}
           close={closePopup}
         />
       )}

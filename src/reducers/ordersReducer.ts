@@ -74,9 +74,10 @@ const filterOrders = (orders, filters) => {
     const byBrand = !filters.brand || o.brand === filters.brand;
     const bySeason = !filters.season || o.season === filters.season;
     const byStatus = !filters.status || o.status === filters.status;
+    const byRetailer = !filters.retailer || o.retailer === filters.retailer;
     const byDate = !cutoff || o.created >= cutoff;
 
-    return byBrand && bySeason && byStatus && byDate;
+    return byBrand && bySeason && byStatus && byRetailer && byDate;
   });
 };
 

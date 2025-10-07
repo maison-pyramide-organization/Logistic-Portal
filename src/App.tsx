@@ -7,6 +7,7 @@ import PrivateRoute from "./layout/privateRoute";
 import Order from "./views/order";
 import Header from "./layout/header";
 import OrdersProvider from "./contexts/ordersContext";
+import CreateAccount from "./views/createAccount";
 
 const App = () => {
   const location = useLocation();
@@ -36,6 +37,14 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        {/* <Route
+          path="/create-account"
+          element={
+            <PrivateRoute>
+              <CreateAccount />
+            </PrivateRoute>
+          }
+        /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<Test />} />
       </Routes>

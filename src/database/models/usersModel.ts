@@ -10,8 +10,10 @@ export const createUser = async (data) => {
 
   try {
     const user = await setDoc(doc(db, "users", data.email), userData);
+    return user;
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 

@@ -1,0 +1,54 @@
+@use "@s/global" as *;
+
+.p {
+  height: calc(100vh - 82px);
+  height: calc(100dvh - 82px);
+  background-color: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 24px;
+}
+.m {
+  width: clamp(0px, 500px, 100%);
+  border-radius: 20px;
+  background-color: $grey-600;
+  padding: 40px 32px;
+}
+
+.f select {
+  border: none;
+  outline: none;
+  margin-top: 24px;
+  padding: 16px 20px;
+  width: 100%;
+  color: white;
+  background-color: $grey-500;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.f input {
+  margin-top: 24px;
+  padding: 16px 20px;
+  width: 100%;
+  color: white;
+  background-color: $grey-500;
+  border-radius: 10px;
+  font-size: 16px;
+  &:placeholder {
+    color: $grey-200;
+    // font-size: 14px;
+  }
+}
+
+.f button {
+  padding: 16px 20px;
+  width: 100%;
+  background-color: $grey-400;
+  color: white;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  margin-top: 40px;
+  border-radius: 10px;
+}

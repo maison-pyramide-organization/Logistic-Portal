@@ -6,7 +6,7 @@ import { AuthContext } from "@/contexts/authContext";
 
 const Header = () => {
   const dropdown = useRef(null) as any;
-  const { isLoggedIn, logout,user } = useContext(AuthContext);
+  const { isLoggedIn, logout, user } = useContext(AuthContext);
 
   const handleLogout = () => {
     logout();
@@ -42,7 +42,6 @@ const Header = () => {
           </div>
           <div className={s.h_dd} ref={dropdown}>
             <ul>
-              <li>Create Account</li>
               <li onClick={handleLogout}>Logout</li>
             </ul>
           </div>

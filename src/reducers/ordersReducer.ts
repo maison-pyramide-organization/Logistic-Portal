@@ -58,8 +58,8 @@ const sortOrders = (orders: any, sortBy: string) => {
     case "amount":
       return orders.sort((a, b) => {
         // Remove any commas and convert to number
-        const amountA = parseFloat(a.amount.replace(/[^0-9.-]+/g, ""));
-        const amountB = parseFloat(b.amount.replace(/[^0-9.-]+/g, ""));
+        const amountA = parseFloat(a.amount?.replace(/[^0-9.-]+/g, ""));
+        const amountB = parseFloat(b.amount?.replace(/[^0-9.-]+/g, ""));
         return amountB - amountA; // Sort in descending order
       });
     default:

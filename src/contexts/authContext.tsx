@@ -1,7 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { getUser } from "@/database/models/usersModel";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { createUser, getUser } from "@/database/models/usersModel";
 import { signIn, logout as signout } from "@/services/firebase/auth";
 
 interface AuthContextType {
@@ -10,6 +13,7 @@ interface AuthContextType {
   loading: boolean;
   logout: () => void;
   login: any;
+  signup: any;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -18,6 +22,7 @@ export const AuthContext = createContext<AuthContextType>({
   loading: true,
   logout: () => {},
   login: null,
+  signup: null,
 });
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -33,6 +38,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const initUser = async (email: string) => {
     const user = await getUser(email);
+
+    if (!user) return null;
     setUser(user);
     return user;
   };
@@ -42,6 +49,26 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (!authUser) return null;
     const user = await initUser(authUser?.email!);
     return user;
+  };
+
+  const signup = async (userData) => {
+    const { email, password } = userData;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const { user } = userCredential;
+      if (!user) throw new Error("User Auth failed");
+      await createUser(userData);
+
+      return user;
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    }
   };
 
   useEffect(() => {
@@ -65,6 +92,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading,
     logout,
     login,
+    signup,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

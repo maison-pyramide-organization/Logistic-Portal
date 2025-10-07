@@ -16,7 +16,7 @@ const getOrders = async () => {
 };
 
 const getBrandOrders = async (brand: string) => {
-  brand = "Monot";
+  // brand = "Monot";
   const { items } = await client.getEntries({
     content_type: "order",
     "fields.brand": brand,

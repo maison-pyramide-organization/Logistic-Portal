@@ -29,11 +29,11 @@ const OrdersProvider = ({ children }: Iprops) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const data = { state, dispatch };
   const { user } = useContext(AuthContext);
+  if (!user) return null;
 
   useEffect(() => {
     const fetchOrders = async () => {
       let orders;
-
       switch (user.type) {
         case "brand":
           orders = await getBrandOrders(user.name);

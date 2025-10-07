@@ -1,5 +1,5 @@
-import { AuthContext } from "@/contexts/authContext";
 import s from "./_s.module.scss";
+import { AuthContext } from "@/contexts/authContext";
 import logo from "@a/images/logo.png";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

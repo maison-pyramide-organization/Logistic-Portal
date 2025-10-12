@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const { isLoggedIn, login } = useContext(AuthContext);
+  console.log(isLoggedIn);
+  
 
   const onSubmit = async (e: any) => {
     e.preventDefault();

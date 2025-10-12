@@ -32,11 +32,13 @@ const OrdersTableBody = () => {
           <td className={s.table_d}>
             {user.type == "brand" ? order.retailer : order.brand}
           </td>
-          {user.type == "admin" && <td className={s.table_d}>{order.retailer}</td>}
+          {user.type == "admin" && (
+            <td className={s.table_d}>{order.retailer}</td>
+          )}
           <td className={s.table_d}>{order.status}</td>
           <td className={s.table_d}>{formatDate(order.created)}</td>
-          <td className={s.table_d}>{order.quantity}</td>
-          <td className={s.table_d}>{order.amount}</td>
+          <td className={s.table_d}>{order.quantity || "--"}</td>
+          <td className={s.table_d}>{order.amount || "--"}</td>
           <td className={s.table_d}>{order.season || "-"}</td>
           <td className={s.table_d}>{order.invoiceNumber}</td>
           <td className={s.table_d}>{order.trackingNumber}</td>

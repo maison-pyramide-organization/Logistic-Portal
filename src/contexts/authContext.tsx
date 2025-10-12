@@ -30,27 +30,31 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [fb_user, setFbUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  const logout = () => {
-    signout();
-    setUser(null);
-    setFbUser(null);
-  };
-
+  // INIT USER
   const initUser = async (email: string) => {
     const user = await getUser(email);
 
     if (!user) return null;
+
     setUser(user);
     return user;
   };
 
+  // LOGIN
   const login = async (email: string, password: string) => {
     const { user: authUser } = await signIn(email, password);
     if (!authUser) return null;
     const user = await initUser(authUser?.email!);
     return user;
   };
+  // LOGOUT
+  const logout = () => {
+    signout();
+    setUser(null);
+    setFbUser(null);
+  };
 
+  // SIGNUP
   const signup = async (userData) => {
     const { email, password } = userData;
     try {
@@ -79,6 +83,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       await initUser(user.email!);
+
       setFbUser(user);
       setLoading(false);
     });
@@ -99,5 +104,4 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
-
 export default AuthProvider;

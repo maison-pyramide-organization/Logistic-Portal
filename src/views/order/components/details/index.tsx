@@ -29,8 +29,8 @@ const Details = (props: Iprops) => {
 
   const x =
     user.type == "brand"
-      ? { title: "Brand", content: brand }
-      : { title: "Retailer", content: retailer };
+      ? { title: "Retailer", content: retailer }
+      : { title: "Brand", content: brand };
 
   const infos: any = [
     { title: "Order Confirmation", content: ocNumber },

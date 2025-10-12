@@ -7,7 +7,7 @@ import PrivateRoute from "./layout/privateRoute";
 import Order from "./views/order";
 import Header from "./layout/header";
 import OrdersProvider from "./contexts/ordersContext";
-import CreateAccount from "./views/createAccount";
+// import CreateAccount from "./views/createAccount";
 
 const App = () => {
   const location = useLocation();

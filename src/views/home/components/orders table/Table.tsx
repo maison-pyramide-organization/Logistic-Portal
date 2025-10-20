@@ -8,10 +8,7 @@ import { OrdersContext } from "@/contexts/ordersContext";
 const OrdersTable = () => {
   const { user } = useContext(AuthContext);
 
-  const {
-    state: { sortBy },
-    dispatch,
-  } = useContext(OrdersContext);
+  const { dispatch } = useContext(OrdersContext);
 
   const onBRClick = () => {
     dispatch({

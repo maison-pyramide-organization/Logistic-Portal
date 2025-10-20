@@ -42,6 +42,12 @@ const OrdersTableBody = () => {
           <td className={s.table_d}>{order.season || "-"}</td>
           <td className={s.table_d}>{order.invoiceNumber}</td>
           <td className={s.table_d}>{order.trackingNumber}</td>
+          {user.type == "admin" && (
+            <>
+              <td className={s.table_d}>{order.shippingTerms || "--"}</td>
+              <td className={s.table_d}>{order.paymentTerms || "--"}</td>
+            </>
+          )}
         </tr>
       ))}
     </tbody>

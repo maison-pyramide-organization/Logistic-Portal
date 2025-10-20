@@ -4,7 +4,7 @@ import { OrdersContext } from "@/contexts/ordersContext";
 import { ACTIONS } from "@/reducers/ordersReducer";
 
 const SortBy = () => {
-  const sortOptions = ["last created", "last modified", "amount"];
+  const sortOptions = ["last created", "last modified", "amount", "quantity"];
   const {
     state: { sortBy },
     dispatch,

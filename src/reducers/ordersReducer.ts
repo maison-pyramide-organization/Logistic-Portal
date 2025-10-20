@@ -55,13 +55,36 @@ const sortOrders = (orders: any, sortBy: string) => {
         return dateB - dateA; // Sort in descending order
       });
 
+    case "quantity":
+      return orders.sort((a, b) => {
+        // Remove any commas and convert to number
+        const amountA = parseInt(a.quantity) || 0;
+        const amountB = parseInt(b.quantity) || 0;
+        return amountB - amountA; // Sort in descending order
+      });
+
     case "amount":
       return orders.sort((a, b) => {
         // Remove any commas and convert to number
-        const amountA = parseFloat(a.amount?.replace(/[^0-9.-]+/g, ""));
-        const amountB = parseFloat(b.amount?.replace(/[^0-9.-]+/g, ""));
+        const amountA = parseFloat(a.amount?.replace(/[^0-9.-]+/g, "")) || 0;
+        const amountB = parseFloat(b.amount?.replace(/[^0-9.-]+/g, "")) || 0;
         return amountB - amountA; // Sort in descending order
       });
+
+    case "brand":
+      return orders.sort((a, b) => {
+        const brandA = a.brand?.trim().toLowerCase() || "";
+        const brandB = b.brand?.trim().toLowerCase() || "";
+        return brandA.localeCompare(brandB);
+      });
+
+    case "retailer":
+      return orders.sort((a, b) => {
+        const brandA = a.retailer?.trim().toLowerCase() || "";
+        const brandB = b.retailer?.trim().toLowerCase() || "";
+        return brandA.localeCompare(brandB);
+      });
+
     default:
       return orders;
   }
@@ -90,7 +113,7 @@ const searchOrders = (orders: any[], query: string) => {
       o.brand,
       o.season,
       o.retailer,
-      o.reference,
+      // o.reference,
       o.trackingNumber,
       o.invoiceNumber,
       o.created, // "YYYY-MM-DD" string

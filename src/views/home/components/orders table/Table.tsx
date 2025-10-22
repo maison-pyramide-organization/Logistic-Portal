@@ -28,6 +28,15 @@ const OrdersTable = () => {
     <div className={s.table_}>
       <table className={s.table}>
         <thead className={s.table_h}>
+            <th className={s.table_h}>season</th>
+            <th className={s.table_h} onClick={onBRClick}>
+              {user.type == "brand" ? "retailer" : "brand"}
+            </th>
+            {user.type == "admin" && (
+              <th className={s.table_h} onClick={onRClick}>
+                retailer
+              </th>
+            )}
           <tr className={s.table_r}>
             {user.type == "admin" ? (
               <>
@@ -40,20 +49,11 @@ const OrdersTable = () => {
               </>
             )}
             <th className={s.table_h}>Remark</th>
-            <th className={s.table_h} onClick={onBRClick}>
-              {user.type == "brand" ? "retailer" : "brand"}
-            </th>
-            {user.type == "admin" && (
-              <th className={s.table_h} onClick={onRClick}>
-                retailer
-              </th>
-            )}
             <th className={s.table_h}>status</th>
             <th className={s.table_h}>created</th>
             <th className={s.table_h}>quantity</th>
             <th className={s.table_h}>amount</th>
-            <th className={s.table_h}>season</th>
-            <th className={s.table_h}>invoice no.</th>
+            <th className={s.table_h}>invoice Ref.</th>
             <th className={s.table_h}>tracking no.</th>
             {user.type == "admin" && (
               <>

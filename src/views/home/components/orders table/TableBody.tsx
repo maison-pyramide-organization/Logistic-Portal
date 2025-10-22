@@ -33,6 +33,15 @@ const OrdersTableBody = () => {
           data-id={order.id}
           onClick={handleOrderClick}
         >
+          <td className={s.table_d}>{order.season || "-"}</td>
+
+          <td className={s.table_d}>
+            {user.type == "brand" ? order.retailer : order.brand}
+          </td>
+
+          {user.type == "admin" && (
+            <td className={s.table_d}>{order.retailer}</td>
+          )}
           {user.type == "admin" ? (
             <>
               <td className={s.table_d}>
@@ -51,18 +60,11 @@ const OrdersTableBody = () => {
           )}
           <td className={s.table_d}>{order.remark || "--"}</td>
           <td className={s.table_d}>
-            {user.type == "brand" ? order.retailer : order.brand}
-          </td>
-          {user.type == "admin" && (
-            <td className={s.table_d}>{order.retailer}</td>
-          )}
-          <td className={s.table_d}>
             {order.status ? <Status status={order.status} /> : "--"}
           </td>
           <td className={s.table_d}>{formatDate(order.created)}</td>
           <td className={s.table_d}>{order.quantity || "--"}</td>
           <td className={s.table_d}>{order.amount || "--"}</td>
-          <td className={s.table_d}>{order.season || "-"}</td>
           <td className={s.table_d}>{order.invoiceNumber}</td>
           <td className={s.table_d}>
             <div

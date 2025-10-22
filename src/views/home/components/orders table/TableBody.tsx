@@ -59,13 +59,20 @@ const OrdersTableBody = () => {
             </>
           )}
           <td className={s.table_d}>{order.remark || "--"}</td>
+          <td className={s.table_d}>{formatDate(order.created)}</td>
           <td className={s.table_d}>
             {order.status ? <Status status={order.status} /> : "--"}
           </td>
-          <td className={s.table_d}>{formatDate(order.created)}</td>
           <td className={s.table_d}>{order.quantity || "--"}</td>
           <td className={s.table_d}>{order.amount || "--"}</td>
+
+          {user.type == "admin" && (
+            <td className={s.table_d}>{order.paymentTerms || "--"}</td>
+          )}
           <td className={s.table_d}>{order.invoiceNumber}</td>
+          {user.type == "admin" && (
+            <td className={s.table_d}>{order.shippingTerms || "--"}</td>
+          )}
           <td className={s.table_d}>
             <div
               dangerouslySetInnerHTML={{
@@ -73,12 +80,6 @@ const OrdersTableBody = () => {
               }}
             />
           </td>
-          {user.type == "admin" && (
-            <>
-              <td className={s.table_d}>{order.shippingTerms || "--"}</td>
-              <td className={s.table_d}>{order.paymentTerms || "--"}</td>
-            </>
-          )}
         </tr>
       ))}
     </tbody>

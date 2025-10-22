@@ -20,6 +20,8 @@ const FinancialSummary = (props: Iprops) => {
     paymentStatus,
     invoiceNumber,
     financialDocuments,
+    dueDate
+
   } = props.order;
 
   const infos = [
@@ -32,6 +34,7 @@ const FinancialSummary = (props: Iprops) => {
   const infos2 = [
     { title: "Outstanding", content: outstanding },
     { title: "Due Payment", content: duePayment },
+    { title: "Due Date", content: dueDate },
   ];
   const openPopup = () => {
     setIsOpened(true);

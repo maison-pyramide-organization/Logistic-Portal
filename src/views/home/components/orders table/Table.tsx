@@ -48,18 +48,20 @@ const OrdersTable = () => {
               </>
             )}
             <th className={s.table_h}>Remark</th>
-            <th className={s.table_h}>status</th>
             <th className={s.table_h}>created</th>
+            <th className={s.table_h}>status</th>
             <th className={s.table_h}>quantity</th>
             <th className={s.table_h}>amount</th>
-            <th className={s.table_h}>invoice Ref.</th>
-            <th className={s.table_h}>tracking no.</th>
+
             {user.type == "admin" && (
-              <>
-                <th className={s.table_h}>shipping terms</th>
-                <th className={s.table_h}>payment terms</th>
-              </>
+              <th className={s.table_h}>payment terms</th>
             )}
+            <th className={s.table_h}>invoice Ref.</th>
+
+            {user.type == "admin" && (
+              <th className={s.table_h}>shipping terms</th>
+            )}
+            <th className={s.table_h}>tracking no.</th>
           </tr>
         </thead>
         <OrdersTableBody />

@@ -23,6 +23,7 @@ const OrdersTable = () => {
     });
   };
 
+
   return (
     <div className={s.table_}>
       <table className={s.table}>

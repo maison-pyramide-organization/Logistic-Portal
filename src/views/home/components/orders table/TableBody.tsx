@@ -18,6 +18,11 @@ const OrdersTableBody = () => {
     navigate(`/orders/${orderId}`);
   };
 
+  const formatRef = (ref) => {
+    if (!ref) return "";
+    return ref.replace(/\s*&\s*/g, "<br>");
+  };
+
   return (
     <tbody className={s.table_b}>
       {orders?.map((order, i) => (
@@ -29,7 +34,13 @@ const OrdersTableBody = () => {
         >
           {user.type == "admin" ? (
             <>
-              <td className={s.table_d}>{order.reference || "--"}</td>
+              <td className={s.table_d}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: formatRef(order.reference),
+                  }}
+                />
+              </td>
             </>
           ) : (
             <>
@@ -50,7 +61,13 @@ const OrdersTableBody = () => {
           <td className={s.table_d}>{order.amount || "--"}</td>
           <td className={s.table_d}>{order.season || "-"}</td>
           <td className={s.table_d}>{order.invoiceNumber}</td>
-          <td className={s.table_d}>{order.trackingNumber}</td>
+          <td className={s.table_d}>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: formatRef(order.trackingNumber),
+              }}
+            />
+          </td>
           {user.type == "admin" && (
             <>
               <td className={s.table_d}>{order.shippingTerms || "--"}</td>

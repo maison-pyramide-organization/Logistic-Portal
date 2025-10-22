@@ -5,6 +5,7 @@ import { OrdersContext } from "@/contexts/ordersContext";
 import { AuthContext } from "@/contexts/authContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Status from "@/components/status";
 const OrdersTableBody = () => {
   const {
     state: { orders },
@@ -55,7 +56,9 @@ const OrdersTableBody = () => {
           {user.type == "admin" && (
             <td className={s.table_d}>{order.retailer}</td>
           )}
-          <td className={s.table_d}>{order.status}</td>
+          <td className={s.table_d}>
+            {order.status ? <Status status={order.status} /> : "--"}
+          </td>
           <td className={s.table_d}>{formatDate(order.created)}</td>
           <td className={s.table_d}>{order.quantity || "--"}</td>
           <td className={s.table_d}>{order.amount || "--"}</td>

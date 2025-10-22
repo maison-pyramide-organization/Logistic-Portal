@@ -1,21 +1,29 @@
 .status {
   padding: 8px;
   border-radius: 8px;
+  text-align: center;
   font-size: 16px;
   color: #f3e351;
   background-color: #3f3e31;
 }
-.canceled {
+.canceled,
+.cancelled {
   color: #e14d6d;
   background-color: #312b2c;
 }
-.pending {
-  color: #f3e351;
+
+.processing,
+.shipped {
+  color: #0086e5;
   background-color: #3f3e31;
 }
-.inproduction {
+.pending {
   color: #8962f0;
   background-color: #2b2c31;
+}
+.inproduction,
+.confirmed {
+  color: #f3e351;
 }
 .closed,
 .delivered {

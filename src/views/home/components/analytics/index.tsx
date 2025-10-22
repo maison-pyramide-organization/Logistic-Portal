@@ -23,7 +23,7 @@ const Analytics = () => {
         {an.map((item) => (
           <div className={s.card} key={item.status}>
             <h2 style={{ borderLeft: `4px solid ${item.color}` }}>
-              {item.status}
+              {item.title}
             </h2>
             <p>{item.count}</p>
           </div>

@@ -23,11 +23,11 @@ const OrdersTable = () => {
     });
   };
 
-
   return (
     <div className={s.table_}>
       <table className={s.table}>
         <thead className={s.table_h}>
+          <tr className={s.table_r}>
             <th className={s.table_h}>season</th>
             <th className={s.table_h} onClick={onBRClick}>
               {user.type == "brand" ? "retailer" : "brand"}
@@ -37,7 +37,6 @@ const OrdersTable = () => {
                 retailer
               </th>
             )}
-          <tr className={s.table_r}>
             {user.type == "admin" ? (
               <>
                 <th className={s.table_h}>Reference</th>

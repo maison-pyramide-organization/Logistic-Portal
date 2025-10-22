@@ -27,8 +27,17 @@ const OrdersTableBody = () => {
           data-id={order.id}
           onClick={handleOrderClick}
         >
-          <td className={s.table_d}>{order.ocNumber || "--"}</td>
-          <td className={s.table_d}>{order.poNumber || "--"}</td>
+          {user.type == "admin" ? (
+            <>
+              <td className={s.table_d}>{order.reference || "--"}</td>
+            </>
+          ) : (
+            <>
+              <td className={s.table_d}>{order.ocNumber || "--"}</td>
+              <td className={s.table_d}>{order.poNumber || "--"}</td>
+            </>
+          )}
+          <td className={s.table_d}>{order.remark || "--"}</td>
           <td className={s.table_d}>
             {user.type == "brand" ? order.retailer : order.brand}
           </td>

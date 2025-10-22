@@ -28,8 +28,17 @@ const OrdersTable = () => {
       <table className={s.table}>
         <thead className={s.table_h}>
           <tr className={s.table_r}>
-            <th className={s.table_h}>OC number</th>
-            <th className={s.table_h}>PO number</th>
+            {user.type == "admin" ? (
+              <>
+                <th className={s.table_h}>Reference</th>
+              </>
+            ) : (
+              <>
+                <th className={s.table_h}>OC number</th>
+                <th className={s.table_h}>PO number</th>
+              </>
+            )}
+            <th className={s.table_h}>Remark</th>
             <th className={s.table_h} onClick={onBRClick}>
               {user.type == "brand" ? "retailer" : "brand"}
             </th>

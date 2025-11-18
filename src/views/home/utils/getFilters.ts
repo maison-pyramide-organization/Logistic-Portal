@@ -10,10 +10,14 @@ export default function getFiltersList(
   orders: any[],
   userType: string
 ): FilterMeta[] {
-  const brands = uniq(orders.map((o) => o.brand));
+  const brands = uniq(orders.map((o) => o.brand)).sort((a, b) =>
+    a.localeCompare(b)
+  );
   const seasons = uniq(orders.map((o) => o.season));
   const statuses = uniq(orders.map((o) => o.status));
-  const retailers = uniq(orders.map((o) => o.retailer));
+  const retailers = uniq(orders.map((o) => o.retailer.trim())).sort((a, b) =>
+    a.localeCompare(b)
+  );
 
   // Base filters that are common for all user types
   const commonFilters: any = [

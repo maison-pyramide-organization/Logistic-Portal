@@ -2,8 +2,9 @@ import s from "./_s.module.scss";
 import Status from "@/components/status";
 import Info from "../info";
 import DownBtn from "../downloadBtn";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/authContext";
+import Popup from "@/components/popup";
 
 interface Iprops {
   order: any;
@@ -25,6 +26,7 @@ const Details = (props: Iprops) => {
     oc,
     po,
     productionStatus,
+    financialDocuments,
   } = props.order;
 
   const x =
@@ -43,33 +45,55 @@ const Details = (props: Iprops) => {
     { title: "Production Status", content: productionStatus, align: "right" },
   ];
 
+  const [isOpened, setIsOpened] = useState(false);
+
+  const openPopup = () => {
+    setIsOpened(true);
+  };
+
+  const closePopup = () => {
+    setIsOpened(false);
+  };
+
   return (
-    <div className={s.d}>
-      <div className={s.d_h}>
-        <h2>Order Details</h2>
-        <div>
-          <Status status={status} />
+    <>
+      <div className={s.d}>
+        <div className={s.d_h}>
+          <h2>Order Details</h2>
+          <div>
+            <Status status={status} />
+          </div>
+        </div>
+        <div className={s.d_b}>
+          {infos.map((info) => (
+            <Info
+              key={info.title}
+              title={info.title}
+              h={false}
+              align={info?.align}
+            >
+              {info.content || "--"}
+            </Info>
+          ))}
+        </div>
+        <div className={s.line}></div>
+        <div className={s.d_b}>
+          <DownBtn title="Order Confirmation" doc={oc} />
+          <DownBtn title="Purchase Order" doc={po} />
+          <DownBtn title="Invoice" doc={oc} />
+          <button className={s["f-docs"]} onClick={openPopup}>
+            Financial Documents
+          </button>
         </div>
       </div>
-      <div className={s.d_b}>
-        {infos.map((info) => (
-          <Info
-            key={info.title}
-            title={info.title}
-            h={false}
-            align={info?.align}
-          >
-            {info.content || "--"}
-          </Info>
-        ))}
-      </div>
-      <div className={s.line}></div>
-      <div className={s.d_b}>
-        <DownBtn title="Order Confirmation" doc={oc} />
-        <DownBtn title="Purchase Order" doc={po} />
-        <DownBtn title="Invoice" doc={oc} />
-      </div>
-    </div>
+      {isOpened && (
+        <Popup
+          title="Financial Documents"
+          documents={financialDocuments}
+          close={closePopup}
+        />
+      )}
+    </>
   );
 };
 

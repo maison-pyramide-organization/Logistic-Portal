@@ -94,10 +94,10 @@ const filterOrders = (orders, filters) => {
   const cutoff = filters.date ? getCutoffYmd(filters.date) : null;
 
   return orders.filter((o) => {
-    const byBrand = !filters.brand || o.brand === filters.brand;
+    const byBrand = !filters.brand || o.brand.trim() === filters.brand;
     const bySeason = !filters.season || o.season === filters.season;
     const byStatus = !filters.status || o.status === filters.status;
-    const byRetailer = !filters.retailer || o.retailer === filters.retailer;
+    const byRetailer = !filters.retailer || o.retailer.trim() === filters.retailer;
     const byDate = !cutoff || o.created >= cutoff;
 
     return byBrand && bySeason && byStatus && byRetailer && byDate;

@@ -3,6 +3,7 @@ import client from "../contentful";
 const getOrders = async () => {
   const { items } = await client.getEntries({
     content_type: "order",
+    limit: 1000,
   });
 
   const orders = items.map(({ fields, sys }) => ({

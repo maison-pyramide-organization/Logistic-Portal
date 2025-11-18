@@ -9,7 +9,6 @@ interface Iprops {
 }
 
 const FinancialSummary = (props: Iprops) => {
-  const [isOpened, setIsOpened] = useState(false);
 
   const {
     amount,
@@ -19,7 +18,6 @@ const FinancialSummary = (props: Iprops) => {
     duePayment,
     paymentStatus,
     invoiceNumber,
-    financialDocuments,
     dueDate
 
   } = props.order;
@@ -36,13 +34,7 @@ const FinancialSummary = (props: Iprops) => {
     { title: "Due Payment", content: duePayment },
     { title: "Due Date", content: dueDate },
   ];
-  const openPopup = () => {
-    setIsOpened(true);
-  };
 
-  const closePopup = () => {
-    setIsOpened(false);
-  };
 
   return (
     <>
@@ -67,19 +59,10 @@ const FinancialSummary = (props: Iprops) => {
               {info.content || "--"}
             </Info>
           ))}
-          <button className={s.docsBtn} onClick={openPopup}>
-            Financial Documents
-          </button>
         </div>
       </div>
 
-      {isOpened && (
-        <Popup
-          title="Financial Documents"
-          documents={financialDocuments}
-          close={closePopup}
-        />
-      )}
+
     </>
   );
 };

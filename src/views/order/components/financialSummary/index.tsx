@@ -1,8 +1,6 @@
 import s from "./_s.module.scss";
 import Status from "@/components/status";
 import Info from "../info";
-import Popup from "@/components/popup";
-import { useState } from "react";
 
 interface Iprops {
   order: any;

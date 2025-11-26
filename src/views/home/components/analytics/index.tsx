@@ -2,10 +2,12 @@ import s from "./_s.module.scss";
 import { OrdersContext } from "@/contexts/ordersContext";
 import { useContext } from "react";
 import getAnalytics from "../../utils/getAnalytics";
+import { ACTIONS } from "@/reducers/ordersReducer";
 
 const Analytics = () => {
   const {
     state: { _orders: orders },
+    dispatch,
   } = useContext(OrdersContext);
 
   // const status = [
@@ -17,11 +19,22 @@ const Analytics = () => {
 
   const an = getAnalytics(orders);
 
+  const handleClick = (status) => {
+    dispatch({
+      type: ACTIONS.FILTER,
+      payload: { filterName: "status", filterOption: status },
+    });
+  };
+
   return (
     <>
       <div className={s.analytics}>
         {an.map((item) => (
-          <div className={s.card} key={item.status}>
+          <div
+            className={s.card}
+            key={item.status}
+            onClick={() => handleClick(item.status)}
+          >
             <h2 style={{ borderLeft: `4px solid ${item.color}` }}>
               {item.title}
             </h2>

@@ -15,7 +15,7 @@ export default function getFiltersList(
   );
   const seasons = uniq(orders.map((o) => o.season));
   const statuses = uniq(orders.map((o) => o.status));
-  const retailers = uniq(orders.map((o) => o.retailer.trim())).sort((a, b) =>
+  const retailers = uniq(orders.map((o) => o.retailer?.trim())).sort((a, b) =>
     a.localeCompare(b)
   );
 

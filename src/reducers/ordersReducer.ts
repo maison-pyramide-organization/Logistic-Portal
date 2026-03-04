@@ -100,7 +100,7 @@ const filterOrders = (orders, filters) => {
     const byStatus = !filters.status || o.status === filters.status;
     const byRetailer =
       !filters.retailer?.trim() ||
-      o.retailer?.trim() === filters.retailer.trim();
+      o.retailer?.trim() === filters.retailer?.trim();
     const byDate = !cutoff || o.created >= cutoff;
 
     return byBrand && bySeason && byStatus && byRetailer && byDate;
@@ -108,7 +108,7 @@ const filterOrders = (orders, filters) => {
 };
 
 const searchOrders = (orders: any[], query: string) => {
-  const q = query.trim().toLowerCase();
+  const q = query?.trim().toLowerCase();
   if (!q) return orders;
 
   return orders.filter((o) => {

@@ -47,7 +47,7 @@ const Search = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch({ type: ACTIONS.SEARCH_ORDERS, payload: q.trim() });
+    dispatch({ type: ACTIONS.SEARCH_ORDERS, payload: q?.trim() });
   };
 
   return (

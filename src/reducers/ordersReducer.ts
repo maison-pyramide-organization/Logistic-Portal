@@ -178,9 +178,19 @@ const reducer = (state, action) => {
     // FILTER ORDERS
     case ACTIONS.FILTER: {
       const { filterName, filterOption } = action.payload;
-      const option =
-        state.filters[filterName] === filterOption ? undefined : filterOption; // toggle
-      const filters = { ...state.filters, [filterName]: option };
+
+      const currentFilter = state.filters[filterName] || [];
+
+      const exists = currentFilter.includes(filterOption);
+
+      const updatedFilter = exists
+        ? currentFilter.filter((v) => v !== filterOption) // remove
+        : [...currentFilter, filterOption]; // add
+
+      const filters = {
+        ...state.filters,
+        [filterName]: updatedFilter,
+      };
 
       return {
         ...state,
@@ -188,6 +198,21 @@ const reducer = (state, action) => {
         orders: filterOrders(state._orders, filters),
       };
     }
+
+    // case ACTIONS.FILTER: {
+    //   const { filterName, filterOption } = action.payload;
+    //   const option =
+    //     state.filters[filterName] === filterOption ? undefined : filterOption; // toggle
+    //   const filters = { ...state.filters, [filterName]: option };
+
+    //   console.log("fff", filters);
+
+    //   return {
+    //     ...state,
+    //     filters,
+    //     orders: filterOrders(state._orders, filters),
+    //   };
+    // }
 
     // SORT ORDERS
     case ACTIONS.SORT:

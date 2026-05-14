@@ -8,7 +8,6 @@ import SortBy from "./sortBy";
 import { AuthContext } from "@/contexts/authContext";
 
 const FiltersList = () => {
-
   const {
     state: { _orders: orders, filters },
     dispatch,
@@ -59,7 +58,6 @@ const FiltersList = () => {
       </div>
     </div>
   );
-
 };
 
 export default FiltersList;

@@ -6,7 +6,7 @@ import IChev from "@a/icons/chev.svg?react";
 import { ACTIONS } from "@/reducers/ordersReducer";
 
 const DateFilter = () => {
-  const DatesOptions = ["last week", "last month", "last quarter"];
+  const DatesOptions = ["this week", "this month", "this quarter"];
 
   const {
     state: { filters },
@@ -45,4 +45,5 @@ const DateFilter = () => {
     </div>
   );
 };
+
 export default DateFilter;

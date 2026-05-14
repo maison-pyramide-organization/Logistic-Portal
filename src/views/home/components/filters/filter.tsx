@@ -11,22 +11,27 @@ import CheckedBoxIcon from "@a/icons/checkedBox.svg?react";
 
 interface Iprops {
   filter: any;
-  active?: string;
+  active?: any;
   onOptionClick: (value: string) => void;
 }
 
 const Filter = ({ filter, active, onOptionClick }: Iprops) => {
   const [isOpened, setIsOpened] = useState(false);
-  const isActiveOption = (opt: string) => active === opt;
+  // const isActiveOption = (opt: string) => active === opt;
+  const isActiveOption = (opt: any) =>
+    Array.isArray(active) ? active.includes(opt) : active === opt;
 
   return (
-    <div data-filter={filter.name} className={`${s.f} ${isOpened ? "open" : ""}`}>
+    <div
+      data-filter={filter.name}
+      className={`${s.f} ${isOpened ? "open" : ""}`}
+    >
       <button
         type="button"
         className={s.f_h}
         onClick={() => setIsOpened(!isOpened)}
       >
-        <h3>{filter.name}</h3>
+        <h3 className={`${active?.length ? "active" : ""}`}>{filter.name}</h3>
         {isOpened ? <MinusIcon /> : <PlusIcon />}
       </button>
       {isOpened && (

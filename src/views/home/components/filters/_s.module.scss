@@ -97,6 +97,9 @@
   color: var(--grey-300);
   letter-spacing: 0.01em;
   text-transform: uppercase;
+  &:global(.active) {
+    color: var(--yellow);
+  }
 }
 .f_h svg {
   width: 16px;

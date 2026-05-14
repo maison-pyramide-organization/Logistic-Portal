@@ -22,6 +22,19 @@ const OrdersTable = () => {
       payload: "retailer",
     });
   };
+  const onAClick = () => {
+    dispatch({
+      type: ACTIONS.SORT,
+      payload: "amount",
+    });
+  };
+
+  const onReClick = () => {
+    dispatch({
+      type: ACTIONS.SORT,
+      payload: "remark",
+    });
+  };
 
   return (
     <div className={s.table_}>
@@ -47,11 +60,15 @@ const OrdersTable = () => {
                 <th className={s.table_h}>PO number</th>
               </>
             )}
-            <th className={s.table_h}>Remark</th>
+            <th className={s.table_h} onClick={onReClick}>
+              Remark
+            </th>
             <th className={s.table_h}>created</th>
             <th className={s.table_h}>status</th>
             <th className={s.table_h}>quantity</th>
-            <th className={s.table_h}>amount</th>
+            <th className={s.table_h} onClick={onAClick}>
+              amount
+            </th>
 
             {user.type == "admin" && (
               <th className={s.table_h}>payment terms</th>

@@ -11,13 +11,28 @@ export const INITIAL_STATE = {
   sortBy: "last created",
   _orders: [],
   orders: [],
+  filterOrders: [],
   search: "",
 };
 
 const DATE_WINDOWS = {
-  "last week": 7,
-  "last month": 30,
-  "last quarter": 90,
+  "this week": 7,
+  "this month": 30,
+  "this quarter": 90,
+};
+
+const computeOrders = (state, overrides: any = {}) => {
+  const filters = overrides.filters ?? state.filters;
+  const search = overrides.search ?? state.search;
+  const sortBy = overrides.sortBy ?? state.sortBy;
+
+  let result = state._orders;
+
+  result = filterOrders(result, filters);
+  result = searchOrders(result, search);
+  result = sortOrders(result, sortBy);
+
+  return result;
 };
 
 // format Date -> "YYYY-MM-DD" (uses local calendar day; consistent for our needs)
@@ -90,17 +105,43 @@ const sortOrders = (orders: any, sortBy: string) => {
   }
 };
 
+// const filterOrders = (orders, filters) => {
+//   const cutoff = filters.date ? getCutoffYmd(filters.date) : null;
+
+//   return orders.filter((o) => {
+//     // const byBrand =
+//     //   !filters.brand?.trim() || o.brand?.trim() === filters.brand.trim();
+//     const byBrand =
+//       !filters.brand?.length || filters.brand.includes(o.brand?.trim());
+//     const bySeason = !filters.season || o.season === filters.season;
+//     const byStatus = !filters.status || o.status === filters.status;
+//     const byRetailer =
+//       !filters.retailer?.trim() ||
+//       o.retailer?.trim() === filters.retailer?.trim();
+//     const byDate = !cutoff || o.created >= cutoff;
+
+//     return byBrand && bySeason && byStatus && byRetailer && byDate;
+//   });
+// };
+
+const matchesArrayFilter = (filterValues, value) => {
+  if (!filterValues?.length) return true;
+
+  return filterValues.includes(value?.trim?.() || value);
+};
+
 const filterOrders = (orders, filters) => {
-  const cutoff = filters.date ? getCutoffYmd(filters.date) : null;
+  const cutoff = filters.date?.length ? getCutoffYmd(filters.date) : null;
 
   return orders.filter((o) => {
-    const byBrand =
-      !filters.brand?.trim() || o.brand?.trim() === filters.brand.trim();
-    const bySeason = !filters.season || o.season === filters.season;
-    const byStatus = !filters.status || o.status === filters.status;
-    const byRetailer =
-      !filters.retailer?.trim() ||
-      o.retailer?.trim() === filters.retailer?.trim();
+    const byBrand = matchesArrayFilter(filters.brand, o.brand);
+
+    const bySeason = matchesArrayFilter(filters.season, o.season);
+
+    const byStatus = matchesArrayFilter(filters.status, o.status);
+
+    const byRetailer = matchesArrayFilter(filters.retailer, o.retailer);
+
     const byDate = !cutoff || o.created >= cutoff;
 
     return byBrand && bySeason && byStatus && byRetailer && byDate;
@@ -109,6 +150,7 @@ const filterOrders = (orders, filters) => {
 
 const searchOrders = (orders: any[], query: string) => {
   const q = query?.trim().toLowerCase();
+
   if (!q) return orders;
 
   return orders.filter((o) => {
@@ -135,15 +177,19 @@ const searchOrders = (orders: any[], query: string) => {
 const reducer = (state, action) => {
   switch (action.type) {
     // SET ORDERS
-    case ACTIONS.SET_ORDERS:
+    case ACTIONS.SET_ORDERS: {
       const orders = action.payload;
-      const SET_sorted_orders = sortOrders(orders, INITIAL_STATE.sortBy);
+
+      const newState = {
+        ...state,
+        _orders: orders,
+      };
 
       return {
-        ...state,
-        _orders: SET_sorted_orders,
-        orders: SET_sorted_orders,
+        ...newState,
+        orders: computeOrders(newState),
       };
+    }
 
     // FILTER ORDERS
     case ACTIONS.CLEAR_FILTERS: {
@@ -154,76 +200,75 @@ const reducer = (state, action) => {
         orders: filterOrders(state._orders, filters),
       };
     }
+
     // SEARCH ORDERS
     case ACTIONS.SEARCH_ORDERS: {
-      const query = String(action.payload || "");
+      const search = String(action.payload || "");
 
-      const ordersResults = searchOrders(state._orders, query);
-      return {
+      const newState = {
         ...state,
-        search: query,
-        orders: ordersResults,
+        search,
+      };
+
+      return {
+        ...newState,
+        orders: computeOrders(newState),
       };
     }
 
     // CLEAR FILTERS
     case ACTIONS.CLEAR_FILTERS: {
-      const filters = {};
-      return {
+      const newState = {
         ...state,
-        filters,
-        orders: state._orders,
+        filters: {},
+      };
+
+      return {
+        ...newState,
+        orders: computeOrders(newState),
       };
     }
+
     // FILTER ORDERS
     case ACTIONS.FILTER: {
       const { filterName, filterOption } = action.payload;
 
       const currentFilter = state.filters[filterName] || [];
-
       const exists = currentFilter.includes(filterOption);
 
       const updatedFilter = exists
-        ? currentFilter.filter((v) => v !== filterOption) // remove
-        : [...currentFilter, filterOption]; // add
+        ? currentFilter.filter((v) => v !== filterOption)
+        : [...currentFilter, filterOption];
 
-      const filters = {
-        ...state.filters,
-        [filterName]: updatedFilter,
+      const newState = {
+        ...state,
+        filters: {
+          ...state.filters,
+          [filterName]: updatedFilter,
+        },
       };
 
       return {
-        ...state,
-        filters,
-        orders: filterOrders(state._orders, filters),
+        ...newState,
+        orders: computeOrders(newState),
       };
     }
 
-    // case ACTIONS.FILTER: {
-    //   const { filterName, filterOption } = action.payload;
-    //   const option =
-    //     state.filters[filterName] === filterOption ? undefined : filterOption; // toggle
-    //   const filters = { ...state.filters, [filterName]: option };
-
-    //   console.log("fff", filters);
-
-    //   return {
-    //     ...state,
-    //     filters,
-    //     orders: filterOrders(state._orders, filters),
-    //   };
-    // }
-
     // SORT ORDERS
-    case ACTIONS.SORT:
-      const SORT_sort_by = action.payload;
-      const SORT_sorted_orders = sortOrders(state.orders, SORT_sort_by);
+    case ACTIONS.SORT: {
+      const sortBy = action.payload;
+
+      const newState = {
+        ...state,
+        sortBy,
+      };
 
       return {
-        ...state,
-        orders: SORT_sorted_orders,
-        sortBy: SORT_sort_by,
+        ...newState,
+        orders: computeOrders(newState),
       };
+    }
+
     default:
       return state;
   }

@@ -27,6 +27,7 @@ export const OrdersContext = createContext<Icontext>({
 
 const OrdersProvider = ({ children }: Iprops) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+
   const data = { state, dispatch };
   const { user } = useContext(AuthContext);
   if (!user) return null;

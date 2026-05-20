@@ -11,6 +11,10 @@
   border-radius: 10px;
   cursor: pointer;
 }
+.downBtn.disabled {
+  background-color: #252525;
+  cursor: unset;
+}
 .downBtn svg {
   width: 16px;
 }

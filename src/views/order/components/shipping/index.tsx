@@ -4,6 +4,8 @@ import DownBtn from "../downloadBtn";
 import Status from "@/components/status";
 import { useState } from "react";
 import Popup from "@/components/popup";
+// @ts-ignore
+import IDownload from "@a/icons/download.svg?react";
 
 interface Iprops {
   order: any;
@@ -15,12 +17,13 @@ const Shipping = (props: Iprops) => {
     shippingDate,
     trackingNumber,
     deliveryDate,
-    deliveryStatus,
     awb,
     packingList,
     commercialInvoice,
     others,
   } = props.order;
+
+  let { deliveryStatus } = props.order;
 
   const infos = [
     { title: "Shipping Terms", content: shippingTerms },
@@ -36,6 +39,12 @@ const Shipping = (props: Iprops) => {
   const closePopup = () => {
     setIsOpened(false);
   };
+  if (shippingDate) {
+    deliveryStatus = "Shipped";
+  }
+  if (deliveryDate) {
+    deliveryStatus = "Delivered";
+  }
 
   return (
     <>
@@ -58,6 +67,7 @@ const Shipping = (props: Iprops) => {
           <DownBtn title="Packing List" doc={packingList} />
           <button className={s.other} onClick={openPopup}>
             Other Documents
+            <IDownload />
           </button>
         </div>
       </div>

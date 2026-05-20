@@ -8,6 +8,7 @@ interface Iprops {
 }
 const DownBtn = (props: Iprops) => {
   const { title, doc } = props;
+  const isDisabled = !doc;
 
   return (
     <a
@@ -15,10 +16,10 @@ const DownBtn = (props: Iprops) => {
       download={doc?.fields.fileName}
       target="_blank"
       rel="noopener"
-      className={s.downBtn}
+      className={`${s.downBtn} ${isDisabled ? s.disabled : ""}`}
     >
       {title}
-      <IDownload />
+      {!isDisabled && <IDownload />}
     </a>
   );
 };

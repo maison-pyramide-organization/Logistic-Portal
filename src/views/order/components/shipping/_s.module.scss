@@ -36,4 +36,10 @@
   padding: 12px 24px;
   border-radius: 10px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.other svg {
+  width: 16px;
 }

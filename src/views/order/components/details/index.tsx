@@ -5,6 +5,8 @@ import DownBtn from "../downloadBtn";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/authContext";
 import Popup from "@/components/popup";
+// @ts-ignore
+import IDownload from "@a/icons/download.svg?react";
 
 interface Iprops {
   order: any;
@@ -83,6 +85,7 @@ const Details = (props: Iprops) => {
           <DownBtn title="Invoice" doc={oc} />
           <button className={s["f-docs"]} onClick={openPopup}>
             Financial Documents
+            <IDownload />
           </button>
         </div>
       </div>

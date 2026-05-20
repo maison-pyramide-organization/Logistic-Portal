@@ -6,6 +6,9 @@ import IDownload from "@a/icons/download.svg?react";
 
 const Popup = (props: any) => {
   const { title, documents, close } = props;
+  if (!documents) {
+    console.log("nooo");
+  }
 
   const handleWrapClick = (e: any) => {
     if (e.target === e.currentTarget) close();
@@ -21,6 +24,9 @@ const Popup = (props: any) => {
           </button>
         </div>
         <div className={s.popup_b}>
+          {!documents && (
+            <p>No Documents Found</p>
+          )}
           <ul>
             {documents?.length > 0 &&
               documents.map((doc, i) => (

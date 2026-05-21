@@ -39,7 +39,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  &:disabled{
+  background-color: #252525;
+
+  }
 }
+
 .other svg {
   width: 16px;
 }

@@ -46,6 +46,8 @@ const ymd = (d: Date) => {
 
 // inclusive cutoff: today minus N-1 days (so "last-week" includes today and 6 days back)
 const getCutoffYmd = (dateOption): string => {
+  console.log("do", dateOption);
+
   const n = DATE_WINDOWS[dateOption];
   const d = new Date();
   d.setHours(0, 0, 0, 0);

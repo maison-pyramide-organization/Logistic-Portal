@@ -6,7 +6,7 @@ import { ACTIONS } from "@/reducers/ordersReducer";
 
 const Analytics = () => {
   const {
-    state: { _orders: orders },
+    state: { orders },
     dispatch,
   } = useContext(OrdersContext);
 

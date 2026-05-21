@@ -45,6 +45,7 @@ const Shipping = (props: Iprops) => {
   if (deliveryDate) {
     deliveryStatus = "Delivered";
   }
+  console.log("ss", others);
 
   return (
     <>
@@ -65,9 +66,13 @@ const Shipping = (props: Iprops) => {
           <DownBtn title="Commercial Inv" doc={commercialInvoice} />
           <DownBtn title="AWB" doc={awb} />
           <DownBtn title="Packing List" doc={packingList} />
-          <button className={s.other} onClick={openPopup}>
+          <button
+            disabled={!others?.length}
+            className={s.other}
+            onClick={openPopup}
+          >
             Other Documents
-            <IDownload />
+            {others?.length && <IDownload />}
           </button>
         </div>
       </div>

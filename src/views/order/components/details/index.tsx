@@ -31,10 +31,19 @@ const Details = (props: Iprops) => {
     financialDocuments,
   } = props.order;
 
-  const x =
-    user.type == "brand"
-      ? { title: "Retailer", content: retailer }
-      : { title: "Brand", content: brand };
+  let x;
+
+  switch (user.type) {
+    case "admin":
+      x = { title: "Brand", content: `${brand} x ${retailer}` };
+      break;
+    case "brand":
+      x = { title: "Retailer", content: retailer };
+      break;
+    default:
+      x = { title: "Brand", content: brand };
+      break;
+  }
 
   const infos: any = [
     { title: "Order Confirmation", content: ocNumber },

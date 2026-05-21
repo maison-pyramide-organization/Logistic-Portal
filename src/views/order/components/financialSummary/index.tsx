@@ -79,4 +79,5 @@ const FinancialSummary = (props: Iprops) => {
     </>
   );
 };
+
 export default FinancialSummary;

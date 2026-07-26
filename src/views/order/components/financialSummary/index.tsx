@@ -1,7 +1,7 @@
 import s from "./_s.module.scss";
 import Status from "@/components/status";
 import Info from "../info";
-import hasDatePassed from "@/utils/hasDatePassed";
+// import hasDatePassed from "@/utils/hasDatePassed";
 import parseNumber from "@/utils/parseNumber";
 
 interface Iprops {
@@ -15,7 +15,7 @@ const FinancialSummary = (props: Iprops) => {
   let { paymentStatus, outstanding } = props.order;
 
   if (dueDate) {
-    const x = hasDatePassed(dueDate);
+    // const x = hasDatePassed(dueDate);
   }
 
   const formatNumber = (value, original) => {

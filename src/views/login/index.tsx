@@ -1,14 +1,12 @@
 import s from "./_s.module.scss";
 import { AuthContext } from "@/contexts/authContext";
-import logo from "@a/images/logo.png";
+import logo from "@a/images/mpx.png";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
   const { isLoggedIn, login } = useContext(AuthContext);
-  console.log(isLoggedIn);
-  
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -27,18 +25,20 @@ const Login = () => {
   return (
     <div className={s.p}>
       <main className={s.m}>
-        <div className={s.logo}>
-          <img src={logo} alt="Maison Pyramide Emblem" />
+        <div className={s.l}>
+          <img className={s.logo} src={logo} alt="Maison Pyramide Emblem" />
         </div>
-        <h1 className={s.title}>Logistics Portal</h1>
-        <form onSubmit={onSubmit} className={s.f}>
-          <input id="email" type="email" placeholder="Email" />
-          <input id="password" type="password" placeholder="Password" />
-          <button type="submit">Login</button>
-        </form>
-        <p className={s.reset}>
-          Forgot your password? <span>Reset</span>
-        </p>
+        <div className={s.r}>
+          <h1 className={s.title}>LOGISTICS PORTAL</h1>
+          <form onSubmit={onSubmit} className={s.f}>
+            <input id="email" type="email" placeholder="Email" />
+            <input id="password" type="password" placeholder="Password" />
+            <button type="submit">Sign in</button>
+          </form>
+          <p className={s.reset}>
+            Forgot your password? <span>Reset</span>
+          </p>
+        </div>
       </main>
     </div>
   );
